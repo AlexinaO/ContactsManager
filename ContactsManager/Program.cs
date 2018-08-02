@@ -13,8 +13,11 @@ namespace ContactsManager
 
         static void Main(string[] args)
         {
-            Console.Clear();
-            AfficherMenu();
+            //while (true) pour faire une boucle infinie
+            //{
+                Console.Clear();
+                AfficherMenu();
+            //}
             string choix;
             do
             {
@@ -39,10 +42,10 @@ namespace ContactsManager
                     case "4":
                         Console.Clear();
                         Quitter();
-                        AfficherMenu();
                         break;
                     default:
                         Console.WriteLine("L'application va fermer");
+                        Quitter();
                         break;
                 }
             } while (choix != "4");
@@ -70,15 +73,18 @@ namespace ContactsManager
             foreach (var contact in contacts)
             {
                 Console.WriteLine(contact);
+                Console.WriteLine("\n");
             }
+            Console.WriteLine("Appuyez sur une touche pour continuer...");
+
         }
         static void AjouterContacts(List<string>contacts)
         {
             Console.WriteLine("Ajout d'un contact");
             Console.WriteLine("Entrez le nom du contact:");
             contacts.Add(Console.ReadLine());
-            Console.WriteLine("Entrez le prenom du contact:");
-            contacts.Add(Console.ReadLine());
+            //Console.WriteLine("Entrez le prenom du contact:");
+            //contacts.Add(Console.ReadLine());
         }
         static void SupprimerContact()
         {
