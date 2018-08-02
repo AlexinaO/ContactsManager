@@ -67,9 +67,9 @@ namespace ContactsManager
         {
             Console.WriteLine("Voici la liste des contacts");
            
-            foreach (var element in contacts)
+            foreach (var contact in contacts)
             {
-                Console.WriteLine(element);
+                Console.WriteLine(contact);
             }
         }
         static void AjouterContacts(List<string>contacts)
@@ -87,6 +87,11 @@ namespace ContactsManager
             contacts.Remove(Console.ReadLine());
 
         }
+        /*static void SupprimerContact()
+        {
+            possible avec un for pour afficher la liste des contacts et permettre un choix de n° de contact
+
+        }*/
         static void Quitter()
         {
             Environment.Exit(0);
