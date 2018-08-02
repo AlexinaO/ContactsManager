@@ -13,7 +13,8 @@ namespace ContactsManager
 
         static void Main(string[] args)
         {
-            //while (true) pour faire une boucle infinie
+            // pour utiliser bool il faut ajouter bool continuer=true
+            //while (true) pour faire une boucle infinie changer en whilet
             //{
                 Console.Clear();
                 AfficherMenu();
@@ -63,6 +64,9 @@ namespace ContactsManager
             Console.WriteLine(menu[2]);
             Console.WriteLine(menu[3]);
             Console.WriteLine("\nFaites votre choix:");
+            /* on peut mettre le switch dedans et puis faire une methode bool
+             * bool continuerExecutuion
+             * et dans cas 4 et default ajouter continuerExecution = false et il faut supprimer le methode quitter*/
        
 
         }
