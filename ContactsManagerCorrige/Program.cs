@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using ContactsManagerCorrige;
 
 namespace ContactsManager
 {
     class Program
     {
-        static List<string> contacts = new List<string>();
+        static List<Contact> contacts = new List<Contact>();
 
         static void Main(string[] args)
         {
@@ -58,11 +59,25 @@ namespace ContactsManager
             Console.Clear();
             Console.WriteLine("LISTE DES CONTACTS\n");
 
+            Console.Write("{0,-10}|", "Nom");
+            Console.Write("{0,-10}|", "Prenom");
+            Console.Write("{0,-20}|", "Email");
+            Console.Write("{0,-15}|", "Telephone");
+            Console.Write("{0,-15}|", "Date Naissance");
+            Console.WriteLine();
+            Console.WriteLine(new string('_',75));
+            Console.ForegroundColor = ConsoleColor.Yellow;
+
             foreach (var contact in contacts)
             {
-                Console.WriteLine($"- {contact}");
+                Console.Write("{0,-10}|",contact.Nom);
+                Console.Write("{0,-10}|",contact.Prenom);
+                Console.Write("{0,-20}|",contact.Email);
+                Console.Write("{0,-15}|",contact.Telephone);
+                Console.Write("{0,-15}|",contact.date.ToShortDateString());
+                Console.WriteLine();
             }
-
+            Console.ResetColor();
             Console.WriteLine("\nAppuie sur une touche pour revenir au menu...");
             Console.ReadKey();
         }
@@ -71,17 +86,38 @@ namespace ContactsManager
         {
             Console.Clear();
             Console.WriteLine("AJOUT D'UN CONTACT\n");
+            var contact = new Contact();
 
-            Console.WriteLine("Entre le nom:");
-            var contact = Console.ReadLine();
-            contacts.Add(contact);
-
+            contact.Nom=SaisirChaineObligatoire("Entrer le nom du contact:");
+            contact.Prenom = SaisirChaineObligatoire("Entrer le prénom du contact:");
+            
+            Console.WriteLine("Entrer l'e-mail du contact:");
+            contact.Email=(Console.ReadLine());
+            Console.WriteLine("Entrer le numéro de téléphone du contact:");
+            contact.Telephone=(Console.ReadLine());
+            Console.WriteLine("Entrer la date de naissance du contact:");
+            contact.date=DateTime.Parse(Console.ReadLine());
             Console.WriteLine("Contact ajouté !");
+
+            contacts.Add(contact);
 
             Console.WriteLine("\nAppuie sur une touche pour revenir au menu...");
             Console.ReadKey();
         }
 
+        static string SaisirChaineObligatoire(string message)
+        {
+            Console.WriteLine(message);
+            var saisie = Console.ReadLine();
+            while (string.IsNullOrWhiteSpace(saisie))
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Champ requis. Recommence:");
+                Console.ResetColor();
+                saisie = Console.ReadLine();
+            }
+            return saisie;
+        }
         static void SupprimerContact()
         {
             Console.Clear();
