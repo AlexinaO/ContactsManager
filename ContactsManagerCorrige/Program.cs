@@ -123,10 +123,19 @@ namespace ContactsManager
             Console.Clear();
             Console.WriteLine("SUPPRESSION D'UN CONTACT\n");
 
-            for (var i = 0; i < contacts.Count; i++)
-            {
-                Console.WriteLine($"- {contacts[i]} ({i})"); //on récupère la valeur et on affiche sa position
-            }
+            /*foreach (var contact in contacts)
+             * 
+             * 
+             * 
+             * 
+             * 
+             * */
+
+
+                for (var i = 0; i < contacts.Count; i++)
+                {
+                    Console.WriteLine($"- {contacts[i]} ({i})"); //on récupère la valeur et on affiche sa position
+                }
             /*les lignes for auraient pu être écrites comme suit mais cela prend plus de temps
              * int position=0;
              * foreach(var contact in contacts)
