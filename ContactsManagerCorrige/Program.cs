@@ -59,20 +59,20 @@ namespace ContactsManager
             Console.Clear();
             Console.WriteLine("LISTE DES CONTACTS\n");
 
-            Console.Write("{0,-10}|", "Nom");
-            Console.Write("{0,-10}|", "Prenom");
-            Console.Write("{0,-20}|", "Email");
+            Console.Write("{0,-20}|", "Nom");
+            Console.Write("{0,-15}|", "Prenom");
+            Console.Write("{0,-30}|", "Email");
             Console.Write("{0,-15}|", "Telephone");
             Console.Write("{0,-15}|", "Date Naissance");
             Console.WriteLine();
-            Console.WriteLine(new string('_',75));
+            Console.WriteLine(new string('_',100));
             Console.ForegroundColor = ConsoleColor.Yellow;
 
             foreach (var contact in contacts)
             {
-                Console.Write("{0,-10}|",contact.Nom);
-                Console.Write("{0,-10}|",contact.Prenom);
-                Console.Write("{0,-20}|",contact.Email);
+                Console.Write("{0,-20}|",contact.Nom);
+                Console.Write("{0,-15}|",contact.Prenom);
+                Console.Write("{0,-30}|",contact.Email);
                 Console.Write("{0,-15}|",contact.Telephone);
                 Console.Write("{0,-15}|",contact.date.ToShortDateString());
                 Console.WriteLine();
