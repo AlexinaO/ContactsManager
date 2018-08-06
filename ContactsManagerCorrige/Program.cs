@@ -134,7 +134,7 @@ namespace ContactsManager
 
                 for (var i = 0; i < contacts.Count; i++)
                 {
-                    Console.WriteLine($"- {contacts[i]} ({i})"); //on récupère la valeur et on affiche sa position
+                    Console.WriteLine($"- {contacts[i].ToString()} ({i})"); //on récupère la valeur et on affiche sa position
                 }
             /*les lignes for auraient pu être écrites comme suit mais cela prend plus de temps
              * int position=0;

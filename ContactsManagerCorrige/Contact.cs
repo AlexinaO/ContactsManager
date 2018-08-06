@@ -19,5 +19,10 @@ namespace ContactsManagerCorrige
 
         }
 
+        public override string ToString()
+        {
+            return $"{Nom} {Prenom}";
+        }
+
     }
 }
