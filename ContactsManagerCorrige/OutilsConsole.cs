@@ -28,15 +28,26 @@ namespace ContactsManagerCorrige
             Console.WriteLine(message);
             var saisie = Console.ReadLine();
 
-            int? resultat = null;
-            int entier;
-            while (!int.TryParse(saisie, out entier)||!string.IsNullOrEmpty(saisie))
+            
+            int entier=0;
+            while (!string.IsNullOrEmpty(saisie) //si ce qui a été saisi n'est pas nul
+                &&!int.TryParse(saisie, out entier)) // et si cela convertit
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Champ requis. Recommencez.");
+                Console.WriteLine("Saisie invalide. Recommencez.");
                 Console.ResetColor();
                 saisie = Console.ReadLine();
             }
+            /*if (string.IsNullOrEmpty(saisie))
+            {
+                return null;
+            }
+            else
+            {
+                return entier;
+            }*/
+            return string.IsNullOrEmpty(saisie)
+                ?(int?)null
         }
 
         static string SaisirChaineObligatoire(string message)
