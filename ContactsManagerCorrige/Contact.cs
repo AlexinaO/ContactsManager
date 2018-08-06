@@ -12,7 +12,7 @@ namespace ContactsManagerCorrige
         public string Prenom { get; set; }
         public string Email { get; set; }
         public string Telephone { get; set; }
-        public DateTime date { get; set; }
+        public DateTime? date { get; set; }
 
         public void AjouterContact()
         {

@@ -88,8 +88,8 @@ namespace ContactsManager
             Console.WriteLine("AJOUT D'UN CONTACT\n");
             var contact = new Contact();
 
-            contact.Nom=SaisirChaineObligatoire("Entrer le nom du contact:");
-            contact.Prenom = SaisirChaineObligatoire("Entrer le prénom du contact:");
+            contact.Nom=OutilsConsole.SaisirChaineObligatoire("Entrer le nom du contact:");
+            contact.Prenom = OutilsConsole.SaisirChaineObligatoire("Entrer le prénom du contact:");
             
             Console.WriteLine("Entrer l'e-mail du contact:");
             contact.Email=(Console.ReadLine());
@@ -105,7 +105,7 @@ namespace ContactsManager
             Console.ReadKey();
         }
 
-        static string SaisirChaineObligatoire(string message)
+        /*static string SaisirChaineObligatoire(string message)
         {
             Console.WriteLine(message);
             var saisie = Console.ReadLine();
@@ -117,7 +117,7 @@ namespace ContactsManager
                 saisie = Console.ReadLine();
             }
             return saisie;
-        }
+        }*/
         static void SupprimerContact()
         {
             Console.Clear();
