@@ -14,10 +14,10 @@ namespace ContactsManagerCorrige
         public string Telephone { get; set; }
         public DateTime? date { get; set; }
 
-        public void AjouterContact()
+        /*public void AjouterContact()
         {
 
-        }
+        }*/
 
         public override string ToString()
         {

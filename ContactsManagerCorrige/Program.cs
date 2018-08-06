@@ -41,7 +41,7 @@ namespace ContactsManager
         /// <returns>Retourne le choix de l'utilisateur</returns>
         static string AfficherMenu()
         {
-            bool continuerExecution = true;
+            //bool continuerExecution = true;
             Console.Clear();
 
             Console.WriteLine("MENU\n");
@@ -74,11 +74,11 @@ namespace ContactsManager
                 Console.Write("{0,-15}|",contact.Prenom);
                 Console.Write("{0,-30}|",contact.Email);
                 Console.Write("{0,-15}|",contact.Telephone);
-                Console.Write("{0,-15}|",contact.date.ToShortDateString());
+                Console.Write("{0,-15}|",contact.date?.ToShortDateString());
                 Console.WriteLine();
             }
             Console.ResetColor();
-            Console.WriteLine("\nAppuie sur une touche pour revenir au menu...");
+            Console.WriteLine("\nAppuiez sur une touche pour revenir au menu...");
             Console.ReadKey();
         }
 
@@ -93,15 +93,17 @@ namespace ContactsManager
             
             Console.WriteLine("Entrer l'e-mail du contact:");
             contact.Email=(Console.ReadLine());
+
             Console.WriteLine("Entrer le numéro de téléphone du contact:");
             contact.Telephone=(Console.ReadLine());
-            Console.WriteLine("Entrer la date de naissance du contact:");
-            contact.date=DateTime.Parse(Console.ReadLine());
-            Console.WriteLine("Contact ajouté !");
+
+            contact.date=OutilsConsole.SaisirDate("Entrer la date de naissance du contact:");
+            //contact.date=DateTime.Parse(Console.ReadLine());
 
             contacts.Add(contact);
+            Console.WriteLine("Contact ajouté !");
 
-            Console.WriteLine("\nAppuie sur une touche pour revenir au menu...");
+            Console.WriteLine("\nAppuiez sur une touche pour revenir au menu...");
             Console.ReadKey();
         }
 
@@ -123,6 +125,12 @@ namespace ContactsManager
             Console.Clear();
             Console.WriteLine("SUPPRESSION D'UN CONTACT\n");
 
+            /*Console.Write("{0,-6} | ", "NUMERO");
+            Console.Write("{0,-10} | ", "NOM");
+            Console.Write("{0,-10} | ", "PRENOM");
+            Console.WriteLine();
+            Console.WriteLine(new string('_', 35));*/
+
             /*foreach (var contact in contacts)
              * 
              * 
@@ -132,7 +140,7 @@ namespace ContactsManager
              * */
 
 
-                for (var i = 0; i < contacts.Count; i++)
+            for (var i = 0; i < contacts.Count; i++)
                 {
                     Console.WriteLine($"- {contacts[i].ToString()} ({i})"); //on récupère la valeur et on affiche sa position
                 }
@@ -142,7 +150,7 @@ namespace ContactsManager
              * {Console.WriteLine($"-{contact}({position}");
              * position++;*/
 
-            Console.Write("Entre le numéro du contact à supprimer: ");
+            Console.Write("Entrez le numéro du contact à supprimer: ");
             var index = int.Parse(Console.ReadLine());
 
             if (index < contacts.Count)

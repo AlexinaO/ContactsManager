@@ -6,36 +6,40 @@ using System.Threading.Tasks;
 
 namespace ContactsManagerCorrige
 {
-    static class OutilsConsole
+    public static class OutilsConsole
     {
-        static int SaisirEntierObligatoire(string message)
+        public static int SaisirEntierObligatoire(string message)
         {
             Console.WriteLine(message);
-            var saisie = Console.ReadLine();
-            while (int.TryParse(string (saisie)) != true) ;
+            string saisie = Console.ReadLine();
+
+
+            int entier = 0;
+            while (string.IsNullOrEmpty(saisie) //si ce qui a été saisi n'est pas nul
+                || !int.TryParse(saisie, out entier)) // ou si cela ne convertit pas
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Ceci n'est pas un entier. Veuillez saisir un entier");
-                Console.ResetColor();
+
+                var messageErreur = string.IsNullOrEmpty(saisie)
+                    ? "Champ obligatoire. Recommencez:"
+                    : "Saisie invalide. Recommencez:";
+                AfficherMessageErreur(messageErreur);
                 saisie = Console.ReadLine();
             }
-            return saisie;
+            return entier;
 
         }
 
-        public static int? SaisirEntier (string message)
+        public static int? SaisirEntier(string message)
         {
             Console.WriteLine(message);
-            var saisie = Console.ReadLine();
+            string saisie = Console.ReadLine();
 
-            
-            int entier=0;
+
+            int entier = 0;
             while (!string.IsNullOrEmpty(saisie) //si ce qui a été saisi n'est pas nul
-                &&!int.TryParse(saisie, out entier)) // et si cela convertit
+                && !int.TryParse(saisie, out entier)) // et si cela convertit
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Saisie invalide. Recommencez.");
-                Console.ResetColor();
+                AfficherMessageErreur("Saisie invalide. Recommencez.");
                 saisie = Console.ReadLine();
             }
             /*if (string.IsNullOrEmpty(saisie))
@@ -47,22 +51,66 @@ namespace ContactsManagerCorrige
                 return entier;
             }*/
             return string.IsNullOrEmpty(saisie)
-                ?(int?)null
+                ? (int?)null
+                : entier;
         }
 
-        static string SaisirChaineObligatoire(string message)
+        public static string SaisirChaineObligatoire(string message)
         {
             Console.WriteLine(message);
             var saisie = Console.ReadLine();
             while (string.IsNullOrWhiteSpace(saisie))
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Champ requis. Recommence:");
-                Console.ResetColor();
+                AfficherMessageErreur("Champ requis. Recommencez:");
                 saisie = Console.ReadLine();
             }
             return saisie;
         }
 
-        
+        public static void AfficherMessageErreur(string message)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(message);
+            Console.ResetColor();
+        }
+        public static DateTime? SaisirDate (string message)
+        {
+            Console.WriteLine(message);
+            string saisie = Console.ReadLine();
+
+
+            DateTime date = default(DateTime);
+            while (!string.IsNullOrEmpty(saisie) //si ce qui a été saisi n'est pas nul
+                && !DateTime.TryParse(saisie, out date)) // et si cela convertit
+            {
+                AfficherMessageErreur("Saisie invalide. Recommencez:");
+                saisie = Console.ReadLine();
+            }
+            return string.IsNullOrEmpty(saisie)
+                ? (DateTime?)null
+                : date;
+
+
+        }
+        public static DateTime SaisirDateObligatoire(string message)
+        {
+            Console.WriteLine(message);
+            string saisie = Console.ReadLine();
+
+
+            DateTime date;
+            while (string.IsNullOrEmpty(saisie) //si ce qui a été saisi n'est pas nul
+                || !DateTime.TryParse(saisie, out date)) // et si cela convertit
+            {
+
+                var messageErreur = string.IsNullOrEmpty(saisie)
+                    ? "Champ obligatoire. Recommencez:"
+                    : "Saisie invalide. Recommencez:";
+                AfficherMessageErreur(messageErreur);
+                saisie = Console.ReadLine();
+            }
+            return date;
+
+        }
+    }
 }
