@@ -26,6 +26,12 @@ namespace ContactsManager
                         SupprimerContact();
                         break;
                     case "4":
+                        //TrierContacts();
+                        break;
+                    case "5":
+                        //FiltrerContacts();
+                        break;
+                    case "Q":
                         continuer = false;
                         break;
                     default:
@@ -48,8 +54,10 @@ namespace ContactsManager
             Console.WriteLine("1. Liste des contacts");
             Console.WriteLine("2. Ajout d’un contact");
             Console.WriteLine("3. Suppression d’un contact");
-            Console.WriteLine("4. Quitter");
-            Console.Write("\nVotre choix: ");
+            Console.WriteLine("4. Trier les contacts");
+            Console.WriteLine("5. Filtrer les contacts");
+            Console.WriteLine("Q. Quitter");
+            Console.Write("\nAppuyez sur le chiffre de votre choix ou sur Q pour quitter: ");
 
             return Console.ReadLine();
         }
@@ -165,6 +173,14 @@ namespace ContactsManager
 
             Console.WriteLine("\nAppuie sur une touche pour revenir au menu...");
             Console.ReadKey();
+
         }
+        /*public static void TrierContacts()
+        {
+            Console.WriteLine("Comment voulez-vous trier les contacts:");
+            Console.WriteLine("1. par nom");
+            Console.WriteLine("2. par prénom");
+            
+        }*/
     }
 }
