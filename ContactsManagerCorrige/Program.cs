@@ -26,6 +26,7 @@ namespace ContactsManager
                         SupprimerContact();
                         break;
                     case "4":
+                        SousMenuTrierContacts();
                         //TrierContacts();
                         break;
                     case "5":
@@ -175,12 +176,47 @@ namespace ContactsManager
             Console.ReadKey();
 
         }
-        /*public static void TrierContacts()
+        public static void SousMenuTrierContacts()
         {
+            Console.Clear();
+            Console.WriteLine("Tri des Contacts\n");
             Console.WriteLine("Comment voulez-vous trier les contacts:");
             Console.WriteLine("1. par nom");
             Console.WriteLine("2. par prénom");
+            Console.WriteLine("Faites votre choix ou Appuyez sur M pour revenir au menu principal:");
+
+            var choix2 = Console.ReadLine();
+            switch (choix2)
+            {
+                case "1":
+                    TrierContactsNom();
+                    break;
+                case "2":
+                    TrierContactsPrenom();
+                    break;
+                case "M":
+                    AfficherMenu();
+                    break;
+                default:
+                    Console.WriteLine("Mauvaise touche. Veuillez faire votre choix");
+                    break;
+            }
+        }
+        public static void TrierContactsNom()
+        {
+            Console.WriteLine("Liste des contacts par nom");
+        }
+
+        public static void TrierContactsPrenom()
+        {
+            Console.WriteLine("Liste des contacts par prénom");
+        }
+        
+
+
+         
+
             
-        }*/
+        
     }
 }
