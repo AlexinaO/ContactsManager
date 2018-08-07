@@ -4,6 +4,8 @@ using ContactsManagerCorrige;
 using System.Linq;
 using System.IO;
 using System.Text;
+using ContactsManagerBusiness;
+using ContactsManager.DAL;
 
 namespace ContactsManager
 {
@@ -11,7 +13,7 @@ namespace ContactsManager
     {
         static event EventHandler ListeModifiee;
 
-        static List<Contact> contacts = new List<Contact>();
+        static List<ContactsManagerBusiness.Contact> contacts = new List<ContactsManagerBusiness.Contact>();
 
         static void Main(string[] args)
         {
