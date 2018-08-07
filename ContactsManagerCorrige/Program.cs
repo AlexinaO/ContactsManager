@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using ContactsManagerCorrige;
 using System.Linq;
+using System.IO;
+using System.Text;
 
 namespace ContactsManager
 {
@@ -11,6 +13,11 @@ namespace ContactsManager
 
         static void Main(string[] args)
         {
+            /*string chaine = "Bonjour";
+            IComparable variable1 = chaine;
+            IEnumerable<char> variable2 = chaine;
+            contacts = GestionDonnees.LireFichier();*/
+
             bool continuer = true;
             while (continuer)
             {
@@ -42,6 +49,7 @@ namespace ContactsManager
                         break;
                 }
             }
+            /*GestionDonnees.EcrireFichier(contacts);*/
         }
         /// <summary>
         /// Affiche le menu
@@ -87,16 +95,81 @@ namespace ContactsManager
                 Console.Write("{0,-15}|",contact.date?.ToShortDateString());
                 Console.WriteLine();
             }
+            
             Console.ResetColor();
             Console.WriteLine("\nAppuyez sur une touche pour revenir au menu...");
             Console.ReadKey();
         }
+        /*{
+            Console.Clear();
+            Console.WriteLine("LISTE DES CONTACTS\n");
+
+            AfficherListeContacts(contacts);
+
+            RevenirMenuPrincipal();
+        }*/
+
+        /*static void AfficherListeContacts(IEnumerable<Contact> listeContacts)
+        {
+            OutilsConsole.AfficherChamp("NOM", 10);
+            OutilsConsole.AfficherChamp("PRENOM", 10);
+            OutilsConsole.AfficherChamp("EMAIL", 20);
+            OutilsConsole.AfficherChamp("TELEPHONE", 10);
+            OutilsConsole.AfficherChamp("DATE NAISSANCE", 10);
+            Console.WriteLine();
+            Console.WriteLine(new string('-', 75));
+
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            foreach (var contact in listeContacts)
+            {
+                OutilsConsole.AfficherChamp(contact.Nom, 10);
+                OutilsConsole.AfficherChamp(contact.Prenom, 10);
+                OutilsConsole.AfficherChamp(contact.Email, 20);
+                OutilsConsole.AfficherChamp(contact.Telephone, 10);
+                OutilsConsole.AfficherChamp(contact.DateNaissance?.ToShortDateString(), 10);
+                Console.WriteLine();
+            }
+            Console.ResetColor();
+        }*/
 
         static void AjouterContact()
         {
             Console.Clear();
             Console.WriteLine("AJOUT D'UN CONTACT\n");
-            var contact = new Contact();
+           var contact = new Contact();
+           /* var fichierContacts = "FichierContacts.txt";
+            if (File.Exists(fichierContacts))
+            {
+                IEnumerable<string> lignesFichier = File.ReadLines(fichierContacts);
+                var contactsDansFichier = new List<Contact>();
+                foreach (var ligneFichier in lignesFichier)
+                {
+                    string[] champs = ligneFichier.Split(';');
+                    var contact2 = new Contact();
+                    contact2.Nom = champs[0];
+                    contact2.Prenom = champs[1];
+                    contact2.Email = champs[2];
+                    contact2.Telephone = champs[3];
+                    contact2.date = string.IsNullOrEmpty(champs[4])
+                                                ? (DateTime?)null
+                                                : DateTime.Parse(champs[4]);
+                    contactsDansFichier.Add(contact);
+                }
+            }
+            else
+            {
+                var contenuFichier = new StringBuilder();
+                foreach (var contact2 in contacts)
+                {
+                    contenuFichier.AppendLine(string.Join(";", contact2.Nom, contact2.Prenom, contact2.Email, contact2.Telephone,contact2.date));
+                    File.WriteAllText(fichierContacts, contenuFichier.ToString());
+
+                }
+
+            }
+                Console.ReadKey();*/
+
+            
 
             contact.Nom=OutilsConsole.SaisirChaineObligatoire("Entrer le nom du contact:");
             contact.Prenom = OutilsConsole.SaisirChaineObligatoire("Entrer le prénom du contact:");
@@ -117,19 +190,7 @@ namespace ContactsManager
             Console.ReadKey();
         }
 
-        /*static string SaisirChaineObligatoire(string message)
-        {
-            Console.WriteLine(message);
-            var saisie = Console.ReadLine();
-            while (string.IsNullOrWhiteSpace(saisie))
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Champ requis. Recommence:");
-                Console.ResetColor();
-                saisie = Console.ReadLine();
-            }
-            return saisie;
-        }*/
+       
         static void SupprimerContact()
         {
             Console.Clear();
