@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using ContactsManagerCorrige;
+using System.Linq;
 
 namespace ContactsManager
 {
@@ -27,12 +28,12 @@ namespace ContactsManager
                         break;
                     case "4":
                         SousMenuTrierContacts();
-                        //TrierContacts();
                         break;
                     case "5":
-                        //FiltrerContacts();
+                        FiltrerContacts();
                         break;
                     case "Q":
+                    case "q":
                         continuer = false;
                         break;
                     default:
@@ -87,7 +88,7 @@ namespace ContactsManager
                 Console.WriteLine();
             }
             Console.ResetColor();
-            Console.WriteLine("\nAppuiez sur une touche pour revenir au menu...");
+            Console.WriteLine("\nAppuyez sur une touche pour revenir au menu...");
             Console.ReadKey();
         }
 
@@ -112,7 +113,7 @@ namespace ContactsManager
             contacts.Add(contact);
             Console.WriteLine("Contact ajouté !");
 
-            Console.WriteLine("\nAppuiez sur une touche pour revenir au menu...");
+            Console.WriteLine("\nAppuyez sur une touche pour revenir au menu...");
             Console.ReadKey();
         }
 
@@ -172,19 +173,20 @@ namespace ContactsManager
                 Console.WriteLine("Numéro invalide !");
             }
 
-            Console.WriteLine("\nAppuie sur une touche pour revenir au menu...");
+            Console.WriteLine("\nAppuyez sur une touche pour revenir au menu...");
             Console.ReadKey();
 
         }
         public static void SousMenuTrierContacts()
         {
             Console.Clear();
-            Console.WriteLine("Tri des Contacts\n");
+            Console.WriteLine("TRI DES CONTACTS\n");
             Console.WriteLine("Comment voulez-vous trier les contacts:");
             Console.WriteLine("1. par nom");
             Console.WriteLine("2. par prénom");
             Console.WriteLine("Faites votre choix ou Appuyez sur M pour revenir au menu principal:");
 
+            
             var choix2 = Console.ReadLine();
             switch (choix2)
             {
@@ -195,6 +197,7 @@ namespace ContactsManager
                     TrierContactsPrenom();
                     break;
                 case "M":
+                case " m":
                     AfficherMenu();
                     break;
                 default:
@@ -204,12 +207,56 @@ namespace ContactsManager
         }
         public static void TrierContactsNom()
         {
-            Console.WriteLine("Liste des contacts par nom");
+            Console.Clear();
+            Console.WriteLine("LISTE DES CONTACTS PAR NOM\n");
+            var triNom = from contact in contacts
+                          orderby contact.Nom ascending
+                          select contact;
+            foreach (var resultat in triNom)
+            {
+                Console.WriteLine(resultat);
+            }
+            RevenirMenuPrincipal();
         }
 
         public static void TrierContactsPrenom()
         {
-            Console.WriteLine("Liste des contacts par prénom");
+            Console.Clear();
+            Console.WriteLine("LISTE DES CONTACTS PAR PRENOM\n");
+            var triPrenom = from contact in contacts
+                         orderby contact.Prenom ascending
+                         select contact;
+            foreach (var resultat in triPrenom)
+            {
+                Console.WriteLine(resultat);
+            }
+            RevenirMenuPrincipal();
+            
+
+        }
+        
+        public static void RevenirMenuPrincipal()
+        {
+            Console.WriteLine("\nAppuyez sur une touche pour revenir au menu principal");
+            Console.ReadKey();
+        }
+        
+        public static void FiltrerContacts()
+        {
+            Console.Clear();
+            Console.WriteLine("FILTRER LES CONTACTS");
+            Console.WriteLine("Saisissez les premières lettres du contact à rechercher");
+            string recherche = Console.ReadLine();
+            var filtreContact = from contact in contacts
+                          where contact.Nom.StartsWith(recherche,StringComparison.OrdinalIgnoreCase) || contact.Prenom.StartsWith(recherche, StringComparison.OrdinalIgnoreCase)
+                          select contact;
+            foreach(var resultat in filtreContact)
+            {
+                Console.WriteLine(resultat);
+            }
+
+
+            RevenirMenuPrincipal();
         }
         
 
