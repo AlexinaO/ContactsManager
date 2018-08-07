@@ -9,6 +9,8 @@ namespace ContactsManager
 {
     class Program
     {
+        static event EventHandler ListeModifiee;
+
         static List<Contact> contacts = new List<Contact>();
 
         static void Main(string[] args)
@@ -17,6 +19,11 @@ namespace ContactsManager
             IComparable variable1 = chaine;
             IEnumerable<char> variable2 = chaine;
             contacts = GestionDonnees.LireFichier();*/
+            ListeModifiee += (sender, EventArgs) =>
+             {
+                 Console.WriteLine("La liste a été modifiée..." + "Le fichier va être mis à jour");
+                 GestionDonnees.EcrireFichier(contacts);
+             };
 
             bool continuer = true;
             while (continuer)
@@ -185,6 +192,7 @@ namespace ContactsManager
 
             contacts.Add(contact);
             Console.WriteLine("Contact ajouté !");
+            OnListeModifiee();
 
             Console.WriteLine("\nAppuyez sur une touche pour revenir au menu...");
             Console.ReadKey();
@@ -228,6 +236,7 @@ namespace ContactsManager
             {
                 contacts.RemoveAt(index);
                 Console.WriteLine("Contact supprimé !");
+                OnListeModifiee();
             }
             else
             {
@@ -319,12 +328,26 @@ namespace ContactsManager
 
             RevenirMenuPrincipal();
         }
+        static void OnListeModifiee()
+        {
+            var handler = ListeModifieeEventArgs;
+            if (handler !=null)
+            {
+                handler(null, new ListeModifieeEventArgs(raison))
+            }
+        }
         
 
 
          
 
             
-        
+     public class ListeModifieeEventArgs:EventArgs
+        {
+            ListeModifieeEventArgs (RaisonListeModifiee raison)
+            {
+
+            }
+        }
     }
 }
