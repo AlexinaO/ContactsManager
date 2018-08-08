@@ -19,11 +19,11 @@ namespace ContactsManager
             IComparable variable1 = chaine;
             IEnumerable<char> variable2 = chaine;
             contacts = GestionDonnees.LireFichier();*/
-            ListeModifiee += (sender, EventArgs) =>
+            /*ListeModifiee += (sender, EventArgs) =>
              {
                  Console.WriteLine("La liste a été modifiée..." + "Le fichier va être mis à jour");
                  GestionDonnees.EcrireFichier(contacts);
-             };
+             };*/
 
             bool continuer = true;
             while (continuer)
@@ -90,19 +90,19 @@ namespace ContactsManager
             Console.Write("{0,-15}|", "Telephone");
             Console.Write("{0,-15}|", "Date Naissance");
             Console.WriteLine();
-            Console.WriteLine(new string('_',100));
+            Console.WriteLine(new string('_', 100));
             Console.ForegroundColor = ConsoleColor.Yellow;
 
             foreach (var contact in contacts)
             {
-                Console.Write("{0,-20}|",contact.Nom);
-                Console.Write("{0,-15}|",contact.Prenom);
-                Console.Write("{0,-30}|",contact.Email);
-                Console.Write("{0,-15}|",contact.Telephone);
-                Console.Write("{0,-15}|",contact.date?.ToShortDateString());
+                Console.Write("{0,-20}|", contact.Nom);
+                Console.Write("{0,-15}|", contact.Prenom);
+                Console.Write("{0,-30}|", contact.Email);
+                Console.Write("{0,-15}|", contact.Telephone);
+                Console.Write("{0,-15}|", contact.date?.ToShortDateString());
                 Console.WriteLine();
             }
-            
+
             Console.ResetColor();
             Console.WriteLine("\nAppuyez sur une touche pour revenir au menu...");
             Console.ReadKey();
@@ -116,7 +116,7 @@ namespace ContactsManager
             RevenirMenuPrincipal();
         }*/
 
-        /*static void AfficherListeContacts(IEnumerable<Contact> listeContacts)
+        /*static void AfficherListeContacts(IEnumerable<Contact> listeContacts) //pour ne voir que la partie je peux itéré sur la liste
         {
             OutilsConsole.AfficherChamp("NOM", 10);
             OutilsConsole.AfficherChamp("PRENOM", 10);
@@ -143,8 +143,28 @@ namespace ContactsManager
         {
             Console.Clear();
             Console.WriteLine("AJOUT D'UN CONTACT\n");
-           var contact = new Contact();
-           /* var fichierContacts = "FichierContacts.txt";
+            var contact = new Contact();
+
+
+            /*Console.ReadKey();*/
+
+
+
+            contact.Nom = OutilsConsole.SaisirChaineObligatoire("Entrer le nom du contact:");
+            contact.Prenom = OutilsConsole.SaisirChaineObligatoire("Entrer le prénom du contact:");
+
+            Console.WriteLine("Entrer l'e-mail du contact:");
+            contact.Email = (Console.ReadLine());
+
+            Console.WriteLine("Entrer le numéro de téléphone du contact:");
+            contact.Telephone = (Console.ReadLine());
+
+            contact.date = OutilsConsole.SaisirDate("Entrer la date de naissance du contact:");
+            //contact.date=DateTime.Parse(Console.ReadLine());
+
+            contacts.Add(contact);
+            Console.WriteLine("Contact ajouté !");
+            var fichierContacts = @"C:\Users\Adminl\Documents\TestFichierContacts\FichierContacts.txt";
             if (File.Exists(fichierContacts))
             {
                 IEnumerable<string> lignesFichier = File.ReadLines(fichierContacts);
@@ -168,37 +188,19 @@ namespace ContactsManager
                 var contenuFichier = new StringBuilder();
                 foreach (var contact2 in contacts)
                 {
-                    contenuFichier.AppendLine(string.Join(";", contact2.Nom, contact2.Prenom, contact2.Email, contact2.Telephone,contact2.date));
+                    contenuFichier.AppendLine(string.Join(";", contact2.Nom, contact2.Prenom, contact2.Email, contact2.Telephone, contact2.date));
                     File.WriteAllText(fichierContacts, contenuFichier.ToString());
 
                 }
 
             }
-                Console.ReadKey();*/
-
-            
-
-            contact.Nom=OutilsConsole.SaisirChaineObligatoire("Entrer le nom du contact:");
-            contact.Prenom = OutilsConsole.SaisirChaineObligatoire("Entrer le prénom du contact:");
-            
-            Console.WriteLine("Entrer l'e-mail du contact:");
-            contact.Email=(Console.ReadLine());
-
-            Console.WriteLine("Entrer le numéro de téléphone du contact:");
-            contact.Telephone=(Console.ReadLine());
-
-            contact.date=OutilsConsole.SaisirDate("Entrer la date de naissance du contact:");
-            //contact.date=DateTime.Parse(Console.ReadLine());
-
-            contacts.Add(contact);
-            Console.WriteLine("Contact ajouté !");
-            OnListeModifiee();
+            //OnListeModifiee();
 
             Console.WriteLine("\nAppuyez sur une touche pour revenir au menu...");
             Console.ReadKey();
         }
 
-       
+
         static void SupprimerContact()
         {
             Console.Clear();
@@ -220,9 +222,9 @@ namespace ContactsManager
 
 
             for (var i = 0; i < contacts.Count; i++)
-                {
-                    Console.WriteLine($"- {contacts[i].ToString()} ({i})"); //on récupère la valeur et on affiche sa position
-                }
+            {
+                Console.WriteLine($"- {contacts[i].ToString()} ({i})"); //on récupère la valeur et on affiche sa position
+            }
             /*les lignes for auraient pu être écrites comme suit mais cela prend plus de temps
              * int position=0;
              * foreach(var contact in contacts)
@@ -236,7 +238,7 @@ namespace ContactsManager
             {
                 contacts.RemoveAt(index);
                 Console.WriteLine("Contact supprimé !");
-                OnListeModifiee();
+                //OnListeModifiee();
             }
             else
             {
@@ -256,7 +258,7 @@ namespace ContactsManager
             Console.WriteLine("2. par prénom");
             Console.WriteLine("Faites votre choix ou Appuyez sur M pour revenir au menu principal:");
 
-            
+
             var choix2 = Console.ReadLine();
             switch (choix2)
             {
@@ -280,8 +282,8 @@ namespace ContactsManager
             Console.Clear();
             Console.WriteLine("LISTE DES CONTACTS PAR NOM\n");
             var triNom = from contact in contacts
-                          orderby contact.Nom ascending
-                          select contact;
+                         orderby contact.Nom ascending
+                         select contact;
             foreach (var resultat in triNom)
             {
                 Console.WriteLine(resultat);
@@ -294,23 +296,23 @@ namespace ContactsManager
             Console.Clear();
             Console.WriteLine("LISTE DES CONTACTS PAR PRENOM\n");
             var triPrenom = from contact in contacts
-                         orderby contact.Prenom ascending
-                         select contact;
+                            orderby contact.Prenom ascending
+                            select contact;
             foreach (var resultat in triPrenom)
             {
                 Console.WriteLine(resultat);
             }
             RevenirMenuPrincipal();
-            
+
 
         }
-        
+
         public static void RevenirMenuPrincipal()
         {
             Console.WriteLine("\nAppuyez sur une touche pour revenir au menu principal");
             Console.ReadKey();
         }
-        
+
         public static void FiltrerContacts()
         {
             Console.Clear();
@@ -318,9 +320,9 @@ namespace ContactsManager
             Console.WriteLine("Saisissez les premières lettres du contact à rechercher");
             string recherche = Console.ReadLine();
             var filtreContact = from contact in contacts
-                          where contact.Nom.StartsWith(recherche,StringComparison.OrdinalIgnoreCase) || contact.Prenom.StartsWith(recherche, StringComparison.OrdinalIgnoreCase)
-                          select contact;
-            foreach(var resultat in filtreContact)
+                                where contact.Nom.StartsWith(recherche, StringComparison.OrdinalIgnoreCase) || contact.Prenom.StartsWith(recherche, StringComparison.OrdinalIgnoreCase)
+                                select contact;
+            foreach (var resultat in filtreContact)
             {
                 Console.WriteLine(resultat);
             }
@@ -328,26 +330,26 @@ namespace ContactsManager
 
             RevenirMenuPrincipal();
         }
-        static void OnListeModifiee()
+        /*static void OnListeModifiee()
         {
             var handler = ListeModifieeEventArgs;
             if (handler !=null)
             {
                 handler(null, new ListeModifieeEventArgs(raison))
             }
-        }
-        
+        }*/
 
 
-         
 
-            
-     public class ListeModifieeEventArgs:EventArgs
-        {
-            ListeModifieeEventArgs (RaisonListeModifiee raison)
-            {
 
-            }
-        }
+
+
+        /*public class ListeModifieeEventArgs:EventArgs
+           {
+               ListeModifieeEventArgs (RaisonListeModifiee raison)
+               {
+
+               }
+           }*/
     }
 }
